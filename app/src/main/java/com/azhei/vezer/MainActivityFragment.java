@@ -80,7 +80,7 @@ public class MainActivityFragment extends Fragment {
 
         requestWeather(tempURL);
         requestWeather(humURL);
-        // requestWeather(rainURL);
+        requestWeather(rainURL);
         requestWeather(pressURL);
 
         requestChart(tempURL);
@@ -92,7 +92,7 @@ public class MainActivityFragment extends Fragment {
 
                 requestWeather(tempURL);
                 requestWeather(humURL);
-                // requestWeather(rainURL);
+                requestWeather(rainURL);
                 requestWeather(pressURL);
 
                 requestChart(tempURL);
@@ -119,6 +119,13 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 requestChart(pressURL);
+            }
+        });
+
+        rainValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestChart(rainURL);
             }
         });
 
@@ -245,6 +252,8 @@ public class MainActivityFragment extends Fragment {
 
         LineDataSet dataset = new LineDataSet(entries, labeltag);
         dataset.setDrawValues(false);
+        dataset.setDrawCircles(false);
+        dataset.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         LineData linedata = new LineData(dataset);
         lineChart.setData(linedata);
 
