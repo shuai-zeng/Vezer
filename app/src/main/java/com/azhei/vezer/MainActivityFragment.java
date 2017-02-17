@@ -2,6 +2,7 @@ package com.azhei.vezer;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,14 +84,20 @@ public class MainActivityFragment extends Fragment {
         requestWeather(pressURL);
 
         requestChart(tempURL);
-        Button refresh = (Button) v.findViewById(R.id.refresh);
-        refresh.setOnClickListener(new View.OnClickListener() {
+
+        final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View v) {
+            public void onRefresh() {
+
                 requestWeather(tempURL);
                 requestWeather(humURL);
                 // requestWeather(rainURL);
                 requestWeather(pressURL);
+
+                requestChart(tempURL);
+
+                swipeRefresh.setRefreshing(false);
             }
         });
 
