@@ -12,12 +12,14 @@
     tools:showIn="@layout/activity_main">
 
     <!-- Temperature data -->
+
     <ImageView
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:id="@+id/tempIcon"
         android:src="@drawable/temperature"
-        android:layout_marginTop="10dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,6 +30,16 @@
         android:layout_marginTop="12dp"
         android:layout_marginLeft="10dp"
         android:text="-- °C" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tempValue"
+        android:layout_alignTop="@id/tempIcon"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/lightValue" />
 
     <!-- Humidity data -->
     <ImageView
@@ -132,6 +144,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp" />
+
     />
 
 </RelativeLayout>
