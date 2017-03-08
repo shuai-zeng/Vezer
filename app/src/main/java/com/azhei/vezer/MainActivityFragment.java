@@ -30,6 +30,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -37,6 +38,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
@@ -200,13 +203,15 @@ public class MainActivityFragment extends Fragment {
 
                 try {
                     String[] payload = new String[response.length()];
+                    String[] timestamp = new String[response.length()];
 
                     for (int i = 0; i < response.length(); i++){
                         JSONObject jsonResponse = (JSONObject) response.get(i);
                         payload[i] = jsonResponse.getString("payload");
+                        timestamp[i] = jsonResponse.getString("timestamp");
                     }
 
-                    loadChart(payload, reqURL);
+                    loadChart(payload, timestamp, reqURL);
 
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(),
@@ -252,11 +257,13 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
-    private void loadChart(String[] data, String URL){
+    private void loadChart(String[] data, String[] timestamp,  String URL){
         ArrayList<Entry> entries = new ArrayList<>();
+        String[] time = new String[timestamp.length];
 
         for(int i = 0; i < data.length; i++) {
             entries.add(new Entry(i, Float.valueOf(data[data.length - 1 - i])));
+            time[i] = (timestamp [timestamp.length - 1 - i]).substring(16, 21);
         }
 
         String labeltag = "";
@@ -295,15 +302,23 @@ public class MainActivityFragment extends Fragment {
         LineData linedata = new LineData(dataset);
         lineChart.setData(linedata);
 
-        setChartStyle();
+        setChartStyle(time);
     }
 
-    private void setChartStyle() {
+    private void setChartStyle(final String[] time) {
         lineChart.setDescription(null);
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setEnabled(false);
         XAxis xAxis = lineChart.getXAxis();
-        xAxis.setEnabled(false);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return time[(int) value % time.length];
+            }
+        });
+        xAxis.setLabelCount(4);
+        //xAxis.setEnabled(false);
+
 
         lineChart.invalidate();
     }
