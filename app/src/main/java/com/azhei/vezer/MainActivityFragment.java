@@ -49,6 +49,8 @@ public class MainActivityFragment extends Fragment {
     private String humURL = "http://192.168.0.13:3000/api/hums";
     private String rainURL = "http://192.168.0.13:3000/api/rains";
     private String pressURL = "http://192.168.0.13:3000/api/press";
+    private String windURL = "http://192.168.0.13:3000/api/winds";
+    private String lightURL = "http://192.168.0.13:3000/api/lights";
 
     private static String TAG = MainActivity.class.getSimpleName();
 
@@ -57,6 +59,8 @@ public class MainActivityFragment extends Fragment {
     private TextView humValue;
     private TextView rainValue;
     private TextView pressValue;
+    private TextView windValue;
+    private TextView lightValue;
 
     private ProgressDialog pDialog;
 
@@ -73,6 +77,8 @@ public class MainActivityFragment extends Fragment {
         humValue = (TextView) v.findViewById(R.id.humValue);
         rainValue = (TextView) v.findViewById(R.id.rainValue);
         pressValue = (TextView) v.findViewById(R.id.pressValue);
+        windValue = (TextView) v.findViewById(R.id.windValue);
+        lightValue = (TextView) v.findViewById(R.id.lightValue);
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
@@ -82,6 +88,8 @@ public class MainActivityFragment extends Fragment {
         requestWeather(humURL);
         requestWeather(rainURL);
         requestWeather(pressURL);
+        requestWeather(windURL);
+        requestWeather(lightURL);
 
         requestChart(tempURL);
 
@@ -94,6 +102,8 @@ public class MainActivityFragment extends Fragment {
                 requestWeather(humURL);
                 requestWeather(rainURL);
                 requestWeather(pressURL);
+                requestWeather(windURL);
+                requestWeather(lightURL);
 
                 requestChart(tempURL);
 
@@ -126,6 +136,20 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 requestChart(rainURL);
+            }
+        });
+
+        windValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestChart(windURL);
+            }
+        });
+
+        lightValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestChart(lightURL);
             }
         });
 
@@ -219,6 +243,12 @@ public class MainActivityFragment extends Fragment {
             case "http://192.168.0.13:3000/api/press":
                 pressValue.setText(data + "kPa");
                 break;
+            case "http://192.168.0.13:3000/api/winds":
+                windValue.setText(data + "m/s");
+                break;
+            case "http://192.168.0.13:3000/api/lights":
+                lightValue.setText(data + "lux");
+                break;
         }
     }
 
@@ -246,6 +276,14 @@ public class MainActivityFragment extends Fragment {
                 break;
             case "http://192.168.0.13:3000/api/press":
                 pressValue.setText(data[0] + "kPa");
+                labeltag = "Pressure";
+                break;
+            case "http://192.168.0.13:3000/api/winds":
+                windValue.setText(data[0] + "m/s");
+                labeltag = "Pressure";
+                break;
+            case "http://192.168.0.13:3000/api/lights":
+                lightValue.setText(data[0] + "lux");
                 labeltag = "Pressure";
                 break;
         }
