@@ -287,11 +287,11 @@ public class MainActivityFragment extends Fragment {
                 break;
             case "http://192.168.0.13:3000/api/winds":
                 windValue.setText(data[0] + "m/s");
-                labeltag = "Pressure";
+                labeltag = "Wind Speed";
                 break;
             case "http://192.168.0.13:3000/api/lights":
                 lightValue.setText(data[0] + "lux");
-                labeltag = "Pressure";
+                labeltag = "Light Intensity";
                 break;
         }
 
