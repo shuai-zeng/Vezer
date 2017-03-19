@@ -48,12 +48,12 @@ import java.util.ArrayList;
  */
 public class MainActivityFragment extends Fragment {
 
-    private String tempURL = "http://192.168.0.13:3000/api/temps";
-    private String humURL = "http://192.168.0.13:3000/api/hums";
-    private String rainURL = "http://192.168.0.13:3000/api/rains";
-    private String pressURL = "http://192.168.0.13:3000/api/press";
-    private String windURL = "http://192.168.0.13:3000/api/winds";
-    private String lightURL = "http://192.168.0.13:3000/api/lights";
+    private String tempURL = "http://www.zoggus.com:3000/vezer/hello/temps";
+    private String humURL = "http://www.zoggus.com:3000/vezer/hello/hums";
+    private String rainURL = "http://www.zoggus.com:3000/vezer/hello/rains";
+    private String pressURL = "http://www.zoggus.com:3000/vezer/hello/press";
+    private String windURL = "http://www.zoggus.com:3000/vezer/hello/winds";
+    private String lightURL = "http://www.zoggus.com:3000/vezer/hello/lights";
 
     private static String TAG = MainActivity.class.getSimpleName();
 
@@ -236,22 +236,22 @@ public class MainActivityFragment extends Fragment {
     private void loadData (String data, String URL){
 
         switch (URL) {
-            case "http://192.168.0.13:3000/api/temps":
+            case "http://www.zoggus.com:3000/vezer/hello/temps":
                 tempValue.setText(data + " °C");
                 break;
-            case "http://192.168.0.13:3000/api/hums":
+            case "http://www.zoggus.com:3000/vezer/hello/hums":
                 humValue.setText(data + " %");
                 break;
-            case "http://192.168.0.13:3000/api/rains":
+            case "http://www.zoggus.com:3000/vezer/hello/rains":
                 rainValue.setText(data + " %");
                 break;
-            case "http://192.168.0.13:3000/api/press":
+            case "http://www.zoggus.com:3000/vezer/hello/press":
                 pressValue.setText(data + "kPa");
                 break;
-            case "http://192.168.0.13:3000/api/winds":
+            case "http://www.zoggus.com:3000/vezer/hello/winds":
                 windValue.setText(data + "m/s");
                 break;
-            case "http://192.168.0.13:3000/api/lights":
+            case "http://www.zoggus.com:3000/vezer/hello/lights":
                 lightValue.setText(data + "lux");
                 break;
         }
@@ -269,27 +269,27 @@ public class MainActivityFragment extends Fragment {
         String labeltag = "";
 
         switch (URL) {
-            case "http://192.168.0.13:3000/api/temps":
+            case "http://www.zoggus.com:3000/vezer/hello/temps":
                 tempValue.setText(data[0] + " °C");
                 labeltag = "Temperature";
                 break;
-            case "http://192.168.0.13:3000/api/hums":
+            case "http://www.zoggus.com:3000/vezer/hello/hums":
                 humValue.setText(data[0] + " %");
                 labeltag = "Humidity";
                 break;
-            case "http://192.168.0.13:3000/api/rains":
+            case "http://www.zoggus.com:3000/vezer/hello/rains":
                 rainValue.setText(data[0] + " %");
                 labeltag = "Rain Index";
                 break;
-            case "http://192.168.0.13:3000/api/press":
+            case "http://www.zoggus.com:3000/vezer/hello/press":
                 pressValue.setText(data[0] + "kPa");
                 labeltag = "Pressure";
                 break;
-            case "http://192.168.0.13:3000/api/winds":
+            case "http://www.zoggus.com:3000/vezer/hello/winds":
                 windValue.setText(data[0] + "m/s");
                 labeltag = "Wind Speed";
                 break;
-            case "http://192.168.0.13:3000/api/lights":
+            case "http://www.zoggus.com:3000/vezer/hello/lights":
                 lightValue.setText(data[0] + "lux");
                 labeltag = "Light Intensity";
                 break;
